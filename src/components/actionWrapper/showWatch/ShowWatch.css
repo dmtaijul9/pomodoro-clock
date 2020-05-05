@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&display=swap');
+
+.showTimeWrap {
+
+}
+.time {
+    font-size: 70px;
+    font-family: 'Baloo Bhaina 2', cursive;
+    margin-top: -40px;
+}
+.controler {
+    margin-top: -70px;
+
+}
