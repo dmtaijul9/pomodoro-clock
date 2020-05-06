@@ -29,6 +29,12 @@ export const decrementCount = () => {
     type: "DECREMENT_COUNT",
   };
 };
+export const returnCount = () => {
+  return {
+    type: "RETURN_COUNT",
+    payload: 59,
+  };
+};
 export const isPause = () => {
   return {
     type: "IS_PAUSE",

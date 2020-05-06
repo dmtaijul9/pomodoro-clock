@@ -3,7 +3,11 @@ import "./ShowWatch.css";
 import PauseIcon from "@material-ui/icons/Pause";
 import RestoreIcon from "@material-ui/icons/Restore";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
-import { isPause as playOrPause } from "../../../store/Redux/action/index";
+import {
+  isPause as playOrPause,
+  returnCount,
+  decrementCount,
+} from "../../../store/Redux/action/index";
 import { useSelector, useDispatch } from "react-redux";
 
 function ShowWatch() {
@@ -14,6 +18,22 @@ function ShowWatch() {
   const isSession = useSelector((state) => state.isSession);
   const breakTime = useSelector((state) => state.break);
   const sessionTime = useSelector((state) => state.session);
+
+  const controler = (isPause) => {
+    let makeSureInterval = function (){
+      dispatch(decrementCount())
+    };
+    dispatch(playOrPause());
+
+    if (!isPause) {
+      setInterval(makeSureInterval, 1000)
+        
+    } else {
+
+      clearInterval(makeSureInterval)
+    }
+  };
+
   return (
     <div className="showTimeWrap">
       {isSession ? <h1>Session</h1> : <h1>Break</h1>}
@@ -23,7 +43,7 @@ function ShowWatch() {
         {count < 10 && count >= 0 ? `0${count}` : count}
       </h1>
       <h1 className="controler">
-        <span onClick={() => dispatch(playOrPause())}>
+        <span onClick={() => controler(isPause)}>
           {" "}
           {isPause ? <PauseIcon /> : <PlayCircleFilledWhiteIcon />}{" "}
         </span>
